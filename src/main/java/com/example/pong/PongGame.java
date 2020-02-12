@@ -20,9 +20,6 @@ import java.io.IOException;
 
 class PongGame extends SurfaceView implements Runnable{
 
-    // Are we debugging?
-    private final boolean DEBUGGING = true;
-
     // These objects are needed to do the drawing
     private SurfaceHolder mOurHolder;
     private Canvas mCanvas;
@@ -30,8 +27,6 @@ class PongGame extends SurfaceView implements Runnable{
 
     // How many frames per second did we get?
     private long mFPS;
-    // The number of milliseconds in a second
-    private final int MILLIS_IN_SECOND = 1000;
 
     // Holds the resolution of the screen
     private int mScreenX;
@@ -193,7 +188,7 @@ class PongGame extends SurfaceView implements Runnable{
                 // Store the current frame rate in mFPS
                 // ready to pass to the update methods of
                 // mBat and mBall next frame/loop
-                mFPS = MILLIS_IN_SECOND / timeThisFrame;
+                mFPS = 1000 / timeThisFrame;
             }
 
         }
@@ -279,9 +274,9 @@ class PongGame extends SurfaceView implements Runnable{
 
             mCanvas.drawText("Charles Foulk", 1250, 75, mPaint);
 
-            if(DEBUGGING){
-                printDebuggingText();
-            }
+
+            printDebuggingText();
+
             // Display the drawing on screen
             // unlockCanvasAndPost is a method of SurfaceView
             mOurHolder.unlockCanvasAndPost(mCanvas);
@@ -305,7 +300,7 @@ class PongGame extends SurfaceView implements Runnable{
                 mPaused = false;
 
                 // Where did the touch happen
-                if(motionEvent.getX() > mScreenX / 2){
+                if(motionEvent.getX() > mScreenX / 2f){
                     // On the right hand side
                     mBat.setMovementState(mBat.RIGHT);
                 }
