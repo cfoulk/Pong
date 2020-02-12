@@ -31,6 +31,7 @@ class PongGame extends SurfaceView implements Runnable{
     // Holds the resolution of the screen
     private int mScreenX;
     private int mScreenY;
+    private Point p;
     // How big will the text be?
     private int mFontSize;
     private int mFontMargin;
@@ -69,13 +70,15 @@ class PongGame extends SurfaceView implements Runnable{
 
         // Initialize these two members/fields
         // With the values passesd in as parameters
-        mScreenX = x;
-        mScreenY = y;
+        p = new Point(x, y);
+        //mScreenX = x;
+         //mScreenY = y;
 
         // Font is 5% (1/20th) of screen width
-        mFontSize = mScreenX / 20;
+        mFontSize = p.getFontSize();
+
         // Margin is 1.5% (1/75th) of screen width
-        mFontMargin = mScreenX / 75;
+        mFontMargin = p.getMargin();
 
         // Initialize the objects
         // ready for drawing with
@@ -84,8 +87,8 @@ class PongGame extends SurfaceView implements Runnable{
         mPaint = new Paint();
 
         // Initialize the bat and ball
-        mBall = new Ball(mScreenX);
-        mBat = new Bat(mScreenX, mScreenY);
+        mBall = new Ball(p.x);
+        mBat = new Bat(p.x, p.y);
 
         // Prepare the SoundPool instance
         // Depending upon the version of Android
@@ -140,7 +143,7 @@ class PongGame extends SurfaceView implements Runnable{
     private void startNewGame(){
 
         // Put the ball back to the starting position
-        mBall.reset(mScreenX, mScreenY);
+        mBall.reset(p.x, p.y);
 
         // Rest the score and the player's chances
         mScore = 0;
@@ -214,7 +217,7 @@ class PongGame extends SurfaceView implements Runnable{
         // Has the ball hit the edge of the screen
 
         // Bottom
-        if(mBall.getRect().bottom > mScreenY){
+        if(mBall.getRect().bottom > p.y){
             mBall.reverseYVelocity();
 
             mLives--;
@@ -239,7 +242,7 @@ class PongGame extends SurfaceView implements Runnable{
         }
 
         // Right
-        if(mBall.getRect().right > mScreenX){
+        if(mBall.getRect().right > p.x){
             mBall.reverseXVelocity();
             mSP.play(mBopID, 1, 1, 0, 0, 1);
         }
@@ -300,7 +303,7 @@ class PongGame extends SurfaceView implements Runnable{
                 mPaused = false;
 
                 // Where did the touch happen
-                if(motionEvent.getX() > mScreenX / 2f){
+                if(motionEvent.getX() > p.x / 2f){
                     // On the right hand side
                     mBat.setMovementState(mBat.RIGHT);
                 }
