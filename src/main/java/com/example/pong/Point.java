@@ -11,7 +11,6 @@ class Point {
         this.y = y;
     }
 
-
     // Font is 5% (1/20th) of screen width
     int getFontSize(){
         return (x/20);

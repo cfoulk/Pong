@@ -341,7 +341,6 @@ class PongGame extends SurfaceView implements Runnable{
 
     }
 
-
     // This method is called by PongActivity
     // when the player starts the game
     public void resume() {
