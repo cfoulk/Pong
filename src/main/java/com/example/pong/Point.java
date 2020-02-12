@@ -11,10 +11,13 @@ class Point {
         this.y = y;
     }
 
+
+    // Font is 5% (1/20th) of screen width
     int getFontSize(){
         return (x/20);
     }
 
+    // Margin is 1.5% (1/75th) of screen width
     int getMargin(){
         return (x/75);
     }

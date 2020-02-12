@@ -29,12 +29,7 @@ class PongGame extends SurfaceView implements Runnable{
     private long mFPS;
 
     // Holds the resolution of the screen
-    private int mScreenX;
-    private int mScreenY;
     private Point p;
-    // How big will the text be?
-    private int mFontSize;
-    private int mFontMargin;
 
     // The game objects
     private Bat mBat;
@@ -71,14 +66,6 @@ class PongGame extends SurfaceView implements Runnable{
         // Initialize these two members/fields
         // With the values passesd in as parameters
         p = new Point(x, y);
-        //mScreenX = x;
-         //mScreenY = y;
-
-        // Font is 5% (1/20th) of screen width
-        mFontSize = p.getFontSize();
-
-        // Margin is 1.5% (1/75th) of screen width
-        mFontMargin = p.getMargin();
 
         // Initialize the objects
         // ready for drawing with
@@ -268,12 +255,12 @@ class PongGame extends SurfaceView implements Runnable{
             mCanvas.drawRect(mBat.getRect(), mPaint);
 
             // Choose the font size
-            mPaint.setTextSize(mFontSize);
+            mPaint.setTextSize(p.getFontSize());
 
             // Draw the HUD
             mCanvas.drawText("Score: " + mScore +
                             "   Lives: " + mLives,
-                    mFontMargin , mFontSize, mPaint);
+                    p.getMargin() , p.getFontSize(), mPaint);
 
             mCanvas.drawText("Charles Foulk", 1250, 75, mPaint);
 
@@ -330,7 +317,7 @@ class PongGame extends SurfaceView implements Runnable{
     }
 
     private void printDebuggingText(){
-        int debugSize = mFontSize / 2;
+        int debugSize = p.getFontSize() / 2;
         mPaint.setTextSize(debugSize);
         mCanvas.drawText("FPS: " + mFPS ,
                 10, 150 + debugSize, mPaint);
